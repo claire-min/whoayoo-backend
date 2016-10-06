@@ -64,7 +64,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.example.Main</mainClass>
+                    <mainClass>com.whoayoo.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
