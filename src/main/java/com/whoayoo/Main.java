@@ -8,13 +8,9 @@ import org.glassfish.jersey.server.ResourceConfig;
 import java.io.IOException;
 import java.net.URI;
 
-/**
- * Main class.
- *
- */
 public class Main {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/";
+    public static final String BASE_URI = "http://localhost:8080/api/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -23,12 +19,13 @@ public class Main {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.example package
-        final ResourceConfig rc = new ResourceConfig().packages("com.whoayoo");
+        final ResourceConfig rc = new ResourceConfig().packages("com.whoayoo.external.restful");
 
+        // look for the static page in the web forlder
         StaticHttpHandler staticHttpHandler = new StaticHttpHandler("src/main/web");
         
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
-        server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
+        server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/"); // add slash
         
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
