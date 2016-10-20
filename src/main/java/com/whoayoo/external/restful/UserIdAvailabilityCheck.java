@@ -14,6 +14,7 @@ import com.whoayoo.requestReceiver.handler.UserIdAvailabilityCheckHandler;
 import com.whoayoo.requestReceiver.request.UserIdAvailabilityCheckRequest;
 import com.whoayoo.requestReceiver.response.UserIdAvailabilityCheckResponse;
 
+
 @Path("userIdAvailabilityCheck")
 public class UserIdAvailabilityCheck {
 	
@@ -24,11 +25,9 @@ public class UserIdAvailabilityCheck {
     @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt(@FormParam("userId") String userId) {
-    	
     	UserIdAvailabilityCheckRequest request = new UserIdAvailabilityCheckRequest(userId);
     	Object response = handler.handle(request);
     	Gson gson = new Gson();
     	return gson.toJson(response);
-    	
     }
 }
