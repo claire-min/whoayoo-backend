@@ -1,15 +1,13 @@
 package com.whoayoo.service.user;
 
-import com.whoayoo.factory.ServiceFactory;
-import com.whoayoo.service.data.DataService;
+import com.whoayoo.factory.Factory;
+import com.whoayoo.util.data.DataUtil;
 
 public class UserService {
-	
-	private DataService dataService = ServiceFactory.getDataService();
+	DataUtil dataService = Factory.getDataUtil();
 	
 	public boolean isUserIdAvailable(String userId) {
-		
-		return !dataService.doesUserIdExist(userId);
-	
+		DataUtil dataUtil = Factory.getDataUtil();
+		return !dataUtil.doesUserIdExist(userId);
 	}
 }
