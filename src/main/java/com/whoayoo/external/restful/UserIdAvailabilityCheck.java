@@ -19,6 +19,7 @@ import com.whoayoo.requestReceiver.response.UserIdAvailabilityCheckResponse;
 public class UserIdAvailabilityCheck {
 	
 	private RequestHandler handler = new UserIdAvailabilityCheckHandler();
+	//private UserIdAvailabilityCheckHandler handler = new UserIdAvailabilityCheckHandler();
 	
     @POST
     @Consumes("application/x-www-form-urlencoded")

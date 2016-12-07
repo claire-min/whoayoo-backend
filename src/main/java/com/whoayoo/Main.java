@@ -21,7 +21,7 @@ public class Main {
         // in com.example package
         final ResourceConfig rc = new ResourceConfig().packages("com.whoayoo.external.restful");
 
-        // look for the static page in the web folder
+        // look for the static page in the web forlder
         StaticHttpHandler staticHttpHandler = new StaticHttpHandler("src/main/web");
         
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
@@ -32,8 +32,6 @@ public class Main {
         return server;
     }
 
-    
-    //s
     /**
      * Main method.
      * @param args

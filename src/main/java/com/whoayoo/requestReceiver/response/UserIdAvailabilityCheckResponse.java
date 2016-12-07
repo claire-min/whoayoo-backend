@@ -7,9 +7,7 @@ public class UserIdAvailabilityCheckResponse {
 		this.isAvailable = isAvailable;
 	}
 
-	/*
 	public boolean isAvailable() {
 		return isAvailable;
 	}
-	*/
 }

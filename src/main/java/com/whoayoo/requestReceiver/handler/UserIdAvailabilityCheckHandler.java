@@ -13,6 +13,17 @@ public class UserIdAvailabilityCheckHandler implements RequestHandler{
 		boolean isAvailable = userService.isUserIdAvailable(req.getUserId());		
 		return new UserIdAvailabilityCheckResponse(isAvailable);
 		
+		/*
+		boolean isExist = userService.doesUserExist(userId, password);
+		if (isExist) {
+			String loginToken = jwtUtil.createNewToken();
+			return new LoginResponse(true, loginToken);
+		} else {
+			return new LoginResponse(false, null);
+		}
+		
+		var loginToken = response.getLoginToken();
+		*/
 	}
 
 }
