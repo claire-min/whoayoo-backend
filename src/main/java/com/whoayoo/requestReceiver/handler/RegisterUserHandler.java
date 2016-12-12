@@ -6,6 +6,7 @@ import com.whoayoo.requestReceiver.response.SimpleSuccessResponse;
 import com.whoayoo.service.user.UserService;
 import com.whoayoo.util.email.EmailUtil;
 
+
 public class RegisterUserHandler implements RequestHandler {
 	@Override
 	public Object handle(Object request) {
@@ -16,12 +17,13 @@ public class RegisterUserHandler implements RequestHandler {
 					req.getUserId(),
 					req.getPassword(),
 					req.getFirstName(),
-					req.getLastName()
+					req.getLastName(),
+					req.getEmailVerificationCode()
 			);
 			
 			
 			EmailUtil emailUtil = Factory.getEmailUtil();
-			emailUtil.send("mhyuns4140@gmail.com", req.getUserId(), "Confirmation Email", "link");
+			emailUtil.send("mhyuns4140@gmail.com", req.getUserId(), "Confirmation Email", "Please click the following link : http://whoayoo.com/" + req.getEmailVerificationCode());
 			
 			
 			
