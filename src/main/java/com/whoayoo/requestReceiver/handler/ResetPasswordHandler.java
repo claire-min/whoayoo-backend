@@ -18,7 +18,7 @@ public class ResetPasswordHandler implements RequestHandler {
 			boolean isReset = userService.resetPassword(req.getUserId());
 			
 			if(isReset) {
-				return new SimpleSuccessResponse(true, "Email has been sent successfully.");
+				return new SimpleSuccessResponse(true, null);
 			}
 			else {
 				return new SimpleSuccessResponse(false, "Email does not exist.");

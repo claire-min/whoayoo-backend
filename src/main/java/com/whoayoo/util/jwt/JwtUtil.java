@@ -4,7 +4,6 @@ import java.security.Key;
 import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import com.whoayoo.factory.Factory;
 
 import io.jsonwebtoken.*;
 
@@ -23,13 +22,8 @@ public class JwtUtil {
 	    Date now = new Date(nowMillis);
 	 
 	    
-	    
-	    
-	    EncodedKey encodedKey = Factory.getEncodedKey();
-	    String key = encodedKey.createNewKey();
-	    
-
-	    
+	    String key = SecretKey.KEY;
+	   
 	   
 	    
 	    //We will sign our JWT with our ApiKey secret
@@ -58,20 +52,27 @@ public class JwtUtil {
 	
 	
 	// method to validate and read the JWT (Decode and Verify Tokens)
-	public void parseJWT(String jwt) {
+	public String getUserIdFromToken(String jwt) {
 		
-		EncodedKey encodedKey = Factory.getEncodedKey();
-		String key = encodedKey.createNewKey();
+		String key = SecretKey.KEY;
 		
 		
 		//This line will throw an exception if it is not a signed JWS (as expected)
-	    Claims claims = Jwts.parser()         
-	       .setSigningKey(DatatypeConverter.parseBase64Binary(key))
-	       .parseClaimsJws(jwt).getBody();
-	    System.out.println("ID: " + claims.getId());
-	    System.out.println("Subject: " + claims.getSubject());
-	    System.out.println("Issuer: " + claims.getIssuer());
-	    System.out.println("Expiration: " + claims.getExpiration());
+		try {
+			Claims claims = Jwts.parser()         
+				       .setSigningKey(DatatypeConverter.parseBase64Binary(key))
+				       .parseClaimsJws(jwt).getBody();
+		    System.out.println("ID: " + claims.getId());
+		    System.out.println("Subject: " + claims.getSubject());
+		    System.out.println("Issuer: " + claims.getIssuer());
+		    System.out.println("Expiration: " + claims.getExpiration());
+		    return claims.getId();
+		} catch (Exception e) {
+			System.out.println("Failed to decrypt JWT");
+			System.out.println(e);
+			return null;
+		}
+	    
 		
 	}
 	

@@ -4,6 +4,7 @@ import com.whoayoo.factory.Factory;
 import com.whoayoo.requestReceiver.request.LoginRequest;
 import com.whoayoo.requestReceiver.response.LoginResponse;
 import com.whoayoo.service.user.UserService;
+import com.whoayoo.service.user.result.LogInResult;
 
 public class LoginHandler implements RequestHandler {
 	@Override
@@ -11,31 +12,23 @@ public class LoginHandler implements RequestHandler {
 		
 			LoginRequest req = (LoginRequest) request;
 			UserService userService = Factory.getUserService();
-			String loginToken = userService.login(req.getUserId(), req.getPassword());
-			
-			if(loginToken != null) {
-				return new LoginResponse(true, loginToken);
+			if (req.getUserId() != null) {
+				LogInResult result = userService.login(req.getUserId(), req.getPassword());
+				
+				if(result.getLoginToken() != null) {
+					return new LoginResponse(true, result.getLoginToken());
+				} else {
+					return new LoginResponse(false, result.getFailedReason());
+				}
+			} else {
+				boolean isSuccess = userService.login(req.getLoginToken());
+				
+				if (isSuccess) {
+					return new LoginResponse(true, null);
+				} else {
+					return new LoginResponse(false, "Invalid login token.");
+				}
 			}
-			
-	
-			return new LoginResponse(false, null);
-		
-		
-		
-		
-		/*
-		boolean isExist = userService.doesUserExist(userId, password);
-		if (isExist) {
-			String loginToken = jwtUtil.createNewToken();
-			return new LoginResponse(true, loginToken);
-		} else {
-			return new LoginResponse(false, null);
-		}
-		
-		var loginToken = response.getLoginToken();
-		*/
-		
-		
 		
 	}
 }
