@@ -1,0 +1,6 @@
+/target/
+.classpath
+.project
+.gitignore.swp
+/.settings/
+.metadata
